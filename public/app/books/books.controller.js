@@ -4,7 +4,7 @@
     function isSelectedBook(books, book) {
         for (var i = books.length; i--;) {
             if (books[i]._id === book._id)
-                return true
+                return true;
         }
 
         return false;
@@ -21,7 +21,7 @@
          return this.Books.getList()
             .then(function (books) {
                 this.$.books = books.data;
-                return this.Books.getUserBooks()
+                return this.Books.getUserBooks();
             }.bind(this))
              .then(function (userBooks) {
                  for (var i = userBooks.data.length; i--;) {
@@ -33,14 +33,14 @@
 
     BooksCtrl.prototype.toggleTreeList = function (item, event) {
         event.stopPropagation();
-        item.selected = !item.selected
+        item.selected = !item.selected;
     };
 
     BooksCtrl.prototype.selectBook = function(book) {
         if(isSelectedBook(this.$.userBooks, book)) {
             return;
         }
-        this.$.userBooks.push(book)
+        this.$.userBooks.push(book);
     };
 
     BooksCtrl.prototype.addToFavorites = function(book) {
@@ -55,10 +55,15 @@
     };
 
     BooksCtrl.prototype.deleteFromFavorites = function(book) {
+        if(!book.favorite) {
+            this.$.userBooks = _.without(this.$.userBooks, book);
+            return;
+        }
+
         return this.Books.delete(book._id)
             .then(function() {
                 book.favorite = false;
-                this.$.userBooks = _.without(this.$.userBooks, book)
+                this.$.userBooks = _.without(this.$.userBooks, book);
             }.bind(this))
     };
 
