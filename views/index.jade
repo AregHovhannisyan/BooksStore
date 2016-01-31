@@ -1,0 +1,31 @@
+doctype
+<!--[if lt IE 7]>      <html lang="en" ng-app="bookStore" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="bookStore" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="bookStore" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="bookStore" class="no-js"> <!--<![endif]-->
+head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title Books store
+
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+
+    link(rel='stylesheet', href='libs/css/bootstrap.min.css')
+    link(rel='stylesheet', href='libs/css/styles.css')
+    link(rel='stylesheet', href='libs/fonts/glyphicons-halflings-regular.woff')
+    link(rel='stylesheet', href='libs/fonts/glyphicons-halflings-regular.woff2')
+    link(rel='stylesheet', href='app/books/books.css')
+
+body
+    .container(ng-view='')
+
+    // In production use:
+      script(src='//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js')
+
+    script(src='libs/angular/angular.min.js')
+    script(src='libs/angular/angular-route.min.js')
+    script(src='libs/lodash.js')
+    script(src='app/app.js')
+    script(src='app/books/books.js')
+    script(src='app/books/books.controller.js')

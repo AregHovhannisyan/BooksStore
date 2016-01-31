@@ -1,0 +1,64 @@
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Book Store</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            <strong> Books </strong>
+            <hr>
+            <ul class="nav nav-stacked">
+                <li ng-repeat="gender in books" class="nav-header cursor-pointer"><a ng-click="booksCtrl.toggleTreeList(gender, $event)"> {{gender.name}} <i class="glyphicon" ng-class="{ 'glyphicon-chevron-right': !gender.selected, 'glyphicon-chevron-down': gender.selected }"></i></a>
+                    <ul class="nav nav-stacked left-margin-20">
+                        <li ng-if="gender.selected" ng-repeat="author in gender.authors"><a ng-click="booksCtrl.toggleTreeList(author, $event)"> {{ author.fullName}} <i class="glyphicon" ng-class="{ 'glyphicon-chevron-right': !author.selected, 'glyphicon-chevron-down': author.selected }"></i></a>
+                            <ul ng-if="author.selected" class="nav nav-stacked left-margin-40">
+                                <li ng-repeat="book in author.books"><a ng-dblclick="booksCtrl.selectBook(book)"> {{ book.name}} </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-sm-9">
+            <strong>My Favorite books</strong>
+            <hr>
+            <div ng-if="!userBooks.length">
+                <p>No favorite books</p>
+            </div>
+            <div ng-if="userBooks.length" class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>author</th>
+                            <th>price</th>
+                            <th>Written Date</th>
+                            <th>Pages Count</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="book in userBooks">
+                        <td>{{book.name}}</td>
+                        <td>{{book.author.fullName}}</td>
+                        <td>{{book.price}}</td>
+                        <td>{{book.writtenDate}}</td>
+                        <td>{{book.pagesCount}}</td>
+                        <td>
+                            <span>
+                                <i class="glyphicon glyphicon-remove cursor-pointer" ng-click="booksCtrl.deleteFromFavorites(book)"></i>
+                                <i class="glyphicon cursor-pointer" ng-class="{ 'glyphicon-star': book.favorite , 'glyphicon-star-empty': !book.favorite }" ng-click="booksCtrl.addToFavorites(book)"></i>
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
